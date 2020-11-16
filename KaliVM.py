@@ -11,7 +11,7 @@ today = t.strftime('%m-%d-%Y')
 vm_name = "Kali-%s" % today
 
 url = 'https://images.offensive-security.com/\
-virtual-images/kali-linux-2019.3-vbox-amd64.ova'
+virtual-images/kali-linux-2020.3-vbox-amd64.ova'
 
 local_filename = url.split('/')[-1]
 
@@ -43,12 +43,12 @@ def download_file(url):
 
 def build_kali_vm():
     print('[*] Configuring Kali VM.')
-    cmd = ("vboxmanage import %s --vsys 0 --vmname %s > /dev/null 2>&1" % (local_filename, vm_name))
+    cmd = ("vboxmanage import %s --vsys 0 --vmname %s --eula accept" % (local_filename, vm_name))
     os.system(cmd)
     clipboardon = "vboxmanage modifyvm %s --clipboard bidirectional" % vm_name
     os.system(clipboardon)
-    scalescreen = "VBoxManage setextradata %s GUI/ScaleFactor 2.5" % vm_name
-    os.system(scalescreen)
+    # scalescreen = "VBoxManage setextradata %s GUI/ScaleFactor 2.5" % vm_name
+    # os.system(scalescreen)
 
 
 def update_vm():
